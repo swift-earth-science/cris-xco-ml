@@ -48,4 +48,4 @@ Open in browser:
 ```bash
 open http://localhost:4010
 ```
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11155540.svg)](https://doi.org/10.5281/zenodo.ç)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11155540.svg)](https://zenodo.org/doi/10.5281/zenodo.11155540)
