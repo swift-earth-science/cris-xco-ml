@@ -1,0 +1,1330 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Model Validation for Carbon Monoxide Column (XCO) &#8212; CrIS XCO ML</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-N46YWZ8Q1W"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-N46YWZ8Q1W');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'validate-xco-cris';</script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="License" href="../license/" />
+    <link rel="prev" title="Welcome to CrIS XCO ML" href="../" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search/"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="CrIS XCO ML - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="CrIS XCO ML - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../">
+                    Welcome to CrIS XCO ML
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Model Validation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Model Validation for Carbon Monoxide Column (XCO)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Miscellaneous</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../license/">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citation/">Citation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/swift-earth-science/cris-xco-ml" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/swift-earth-science/cris-xco-ml/issues/new?title=Issue%20on%20page%20%2Fvalidate-xco-cris.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/validate-xco-cris.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Model Validation for Carbon Monoxide Column (XCO)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-python-packages">Import Python packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-model-version">Select model version</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-input-and-output-variables">Read the input and output variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#put-everything-in-a-dataframe">Put everything in a DataFrame</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-input-and-output-variables-of-the-neural-network-model">Define input and output variables of the neural network model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-model">Load the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tropess-xco-truth">TROPESS XCO (Truth)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sears-xco-cris-ml-v1-9-predicted">SEARS XCO CrIS ML v1.9 (Predicted)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difference">Difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-less-than-10">Difference (less than 10%)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="model-validation-for-carbon-monoxide-column-xco">
+<h1>Model Validation for Carbon Monoxide Column (XCO)<a class="headerlink" href="#model-validation-for-carbon-monoxide-column-xco" title="Permalink to this heading">#</a></h1>
+<p>This code validates the <code class="docutils literal notranslate"><span class="pre">SEARS</span> <span class="pre">XCO</span> <span class="pre">CrIS</span> <span class="pre">ML</span> <span class="pre">v1.9</span></code> model for Carbon Monoxide Column (XCO).</p>
+<p>The code runs a test for <code class="docutils literal notranslate"><span class="pre">January</span> <span class="pre">2nd,</span> <span class="pre">2024</span></code> and compares the TROPESS XCO data “Truth” with the SEARS XCO CrIS ML v1.9 model predictions for the same day.</p>
+<section id="import-python-packages">
+<h2>Import Python packages<a class="headerlink" href="#import-python-packages" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># data i/o</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">load</span>
+
+<span class="c1"># Machine Learning</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">root_mean_squared_error</span>
+
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
+
+<span class="c1"># Plotting</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.basemap</span> <span class="kn">import</span> <span class="n">Basemap</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-05-09 13:57:53.779725: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="select-model-version">
+<h2>Select model version<a class="headerlink" href="#select-model-version" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model version</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;v1.9&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="read-the-input-and-output-variables">
+<h2>Read the input and output variables<a class="headerlink" href="#read-the-input-and-output-variables" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;./data/TRPSYL2COCRS1FS.1/2024-01-02/tropess_cris_rad.nc&#39;</span><span class="p">)</span>
+
+<span class="c1"># microwindows</span>
+<span class="n">x_mw</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;x_mw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># get the radiances</span>
+<span class="n">rad_sw</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;rad_sw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">rad_mw</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;rad_mw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">rad_lw</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;rad_lw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># get the wavenumber grids</span>
+<span class="n">wnum_lw</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;wnum_lw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">wnum_mw</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;wnum_mw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">wnum_sw</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;wnum_sw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># select the wavenumber range within the x_mw range</span>
+<span class="n">index_sw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">wnum_sw</span> <span class="o">&gt;=</span> <span class="n">x_mw</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wnum_sw</span> <span class="o">&lt;=</span> <span class="n">x_mw</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">index_mw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">wnum_mw</span> <span class="o">&gt;=</span> <span class="n">x_mw</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wnum_mw</span> <span class="o">&lt;=</span> <span class="n">x_mw</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">index_lw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">wnum_lw</span> <span class="o">&gt;=</span> <span class="n">x_mw</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wnum_lw</span> <span class="o">&lt;=</span> <span class="n">x_mw</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># select the radiances within the x_mw range</span>
+<span class="n">rad_sw</span> <span class="o">=</span> <span class="n">rad_sw</span><span class="p">[:,</span> <span class="n">index_sw</span><span class="p">]</span>
+<span class="n">rad_mw</span> <span class="o">=</span> <span class="n">rad_mw</span><span class="p">[:,</span> <span class="n">index_mw</span><span class="p">]</span>
+<span class="n">rad_lw</span> <span class="o">=</span> <span class="n">rad_lw</span><span class="p">[:,</span> <span class="n">index_lw</span><span class="p">]</span>
+
+<span class="c1"># concatenate the radiances</span>
+<span class="n">rad_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">rad_sw</span><span class="p">,</span> <span class="n">rad_mw</span><span class="p">,</span> <span class="n">rad_lw</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="put-everything-in-a-dataframe">
+<h2>Put everything in a DataFrame<a class="headerlink" href="#put-everything-in-a-dataframe" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rad_all</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;freq_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rad_all</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;sol_zen&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;sol_zen&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;view_ang&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;view_ang&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;surf_alt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;surf_alt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;x_col&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;x_col&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>freq_0</th>
+      <th>freq_1</th>
+      <th>freq_2</th>
+      <th>freq_3</th>
+      <th>freq_4</th>
+      <th>freq_5</th>
+      <th>freq_6</th>
+      <th>freq_7</th>
+      <th>freq_8</th>
+      <th>freq_9</th>
+      <th>...</th>
+      <th>freq_27</th>
+      <th>freq_28</th>
+      <th>freq_29</th>
+      <th>freq_30</th>
+      <th>sol_zen</th>
+      <th>view_ang</th>
+      <th>lat</th>
+      <th>lon</th>
+      <th>surf_alt</th>
+      <th>x_col</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.728163</td>
+      <td>1.877602</td>
+      <td>1.868290</td>
+      <td>1.487039</td>
+      <td>1.684189</td>
+      <td>1.831528</td>
+      <td>1.614480</td>
+      <td>1.712737</td>
+      <td>1.533962</td>
+      <td>1.192963</td>
+      <td>...</td>
+      <td>1.130634</td>
+      <td>1.071487</td>
+      <td>1.139017</td>
+      <td>0.981569</td>
+      <td>126.349365</td>
+      <td>10.695498</td>
+      <td>-28.976671</td>
+      <td>14.779457</td>
+      <td>0.000000</td>
+      <td>68.560249</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.649486</td>
+      <td>1.698336</td>
+      <td>1.633244</td>
+      <td>1.305192</td>
+      <td>1.466797</td>
+      <td>1.604789</td>
+      <td>1.490178</td>
+      <td>1.549921</td>
+      <td>1.319077</td>
+      <td>1.174590</td>
+      <td>...</td>
+      <td>0.955425</td>
+      <td>0.936192</td>
+      <td>0.961850</td>
+      <td>0.917609</td>
+      <td>127.896027</td>
+      <td>32.346649</td>
+      <td>-28.220890</td>
+      <td>10.905661</td>
+      <td>0.000000</td>
+      <td>65.140305</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.502273</td>
+      <td>1.681431</td>
+      <td>1.603127</td>
+      <td>1.244511</td>
+      <td>1.400010</td>
+      <td>1.578782</td>
+      <td>1.347940</td>
+      <td>1.441621</td>
+      <td>1.259302</td>
+      <td>0.975720</td>
+      <td>...</td>
+      <td>0.874194</td>
+      <td>0.813178</td>
+      <td>0.886241</td>
+      <td>0.761095</td>
+      <td>121.915581</td>
+      <td>41.584274</td>
+      <td>-30.538448</td>
+      <td>24.387032</td>
+      <td>1480.430786</td>
+      <td>60.777603</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.585017</td>
+      <td>1.788456</td>
+      <td>1.718454</td>
+      <td>1.324924</td>
+      <td>1.513300</td>
+      <td>1.699426</td>
+      <td>1.445408</td>
+      <td>1.541950</td>
+      <td>1.371280</td>
+      <td>1.021333</td>
+      <td>...</td>
+      <td>0.927304</td>
+      <td>0.856228</td>
+      <td>0.955061</td>
+      <td>0.834249</td>
+      <td>122.145279</td>
+      <td>39.115875</td>
+      <td>-30.598688</td>
+      <td>23.613056</td>
+      <td>1201.312378</td>
+      <td>61.305073</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.720866</td>
+      <td>1.889747</td>
+      <td>1.871431</td>
+      <td>1.504817</td>
+      <td>1.657643</td>
+      <td>1.841449</td>
+      <td>1.634289</td>
+      <td>1.700501</td>
+      <td>1.541654</td>
+      <td>1.176711</td>
+      <td>...</td>
+      <td>1.140300</td>
+      <td>1.070431</td>
+      <td>1.134980</td>
+      <td>0.971587</td>
+      <td>124.923309</td>
+      <td>6.004320</td>
+      <td>-29.820435</td>
+      <td>17.160793</td>
+      <td>148.928574</td>
+      <td>69.753883</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>40465</th>
+      <td>0.516140</td>
+      <td>0.525526</td>
+      <td>0.510668</td>
+      <td>0.455970</td>
+      <td>0.474169</td>
+      <td>0.484743</td>
+      <td>0.489949</td>
+      <td>0.454427</td>
+      <td>0.466745</td>
+      <td>0.417149</td>
+      <td>...</td>
+      <td>0.337447</td>
+      <td>0.339147</td>
+      <td>0.335459</td>
+      <td>0.338968</td>
+      <td>91.250351</td>
+      <td>13.073485</td>
+      <td>-65.800491</td>
+      <td>-1.297861</td>
+      <td>0.000000</td>
+      <td>38.749565</td>
+    </tr>
+    <tr>
+      <th>40466</th>
+      <td>0.517676</td>
+      <td>0.546703</td>
+      <td>0.510474</td>
+      <td>0.460309</td>
+      <td>0.480100</td>
+      <td>0.507740</td>
+      <td>0.490774</td>
+      <td>0.489769</td>
+      <td>0.448977</td>
+      <td>0.439844</td>
+      <td>...</td>
+      <td>0.346478</td>
+      <td>0.335610</td>
+      <td>0.327897</td>
+      <td>0.317088</td>
+      <td>91.156967</td>
+      <td>20.751623</td>
+      <td>-65.773331</td>
+      <td>-4.446333</td>
+      <td>0.000000</td>
+      <td>41.074181</td>
+    </tr>
+    <tr>
+      <th>40467</th>
+      <td>0.389643</td>
+      <td>0.392439</td>
+      <td>0.385829</td>
+      <td>0.345680</td>
+      <td>0.364458</td>
+      <td>0.349169</td>
+      <td>0.381284</td>
+      <td>0.356691</td>
+      <td>0.326714</td>
+      <td>0.330235</td>
+      <td>...</td>
+      <td>0.270910</td>
+      <td>0.265628</td>
+      <td>0.275966</td>
+      <td>0.275979</td>
+      <td>90.281052</td>
+      <td>19.819241</td>
+      <td>-66.617737</td>
+      <td>-5.267918</td>
+      <td>0.000000</td>
+      <td>39.520351</td>
+    </tr>
+    <tr>
+      <th>40468</th>
+      <td>0.362302</td>
+      <td>0.374521</td>
+      <td>0.359075</td>
+      <td>0.333816</td>
+      <td>0.350586</td>
+      <td>0.353371</td>
+      <td>0.335240</td>
+      <td>0.349497</td>
+      <td>0.322690</td>
+      <td>0.324345</td>
+      <td>...</td>
+      <td>0.266414</td>
+      <td>0.250868</td>
+      <td>0.253618</td>
+      <td>0.259445</td>
+      <td>90.053825</td>
+      <td>26.098942</td>
+      <td>-66.655052</td>
+      <td>-8.386524</td>
+      <td>0.000000</td>
+      <td>40.093941</td>
+    </tr>
+    <tr>
+      <th>40469</th>
+      <td>0.721977</td>
+      <td>0.794511</td>
+      <td>0.727240</td>
+      <td>0.604583</td>
+      <td>0.612928</td>
+      <td>0.723280</td>
+      <td>0.624739</td>
+      <td>0.654282</td>
+      <td>0.562119</td>
+      <td>0.450953</td>
+      <td>...</td>
+      <td>0.337577</td>
+      <td>0.346104</td>
+      <td>0.359273</td>
+      <td>0.357260</td>
+      <td>91.867027</td>
+      <td>48.364948</td>
+      <td>-63.438637</td>
+      <td>-19.670118</td>
+      <td>0.000000</td>
+      <td>42.956348</td>
+    </tr>
+  </tbody>
+</table>
+<p>40470 rows × 37 columns</p>
+</div></div></div>
+</div>
+<section id="define-input-and-output-variables-of-the-neural-network-model">
+<h3>Define input and output variables of the neural network model<a class="headerlink" href="#define-input-and-output-variables-of-the-neural-network-model" title="Permalink to this heading">#</a></h3>
+<p>In a next step, you define the columns and rows of the loaded dataset that shall serve as input (X) and output (y) variables of the neural network model. The first 31 + 5 columns featuring spectral radiance values for 31 wavelengths as well as solar zenith angle, sensor view angle, latitude, longitude, and surface altitude will serve as input (X) variables. The XCO column Carbon Monoxide information serves as output (y) variable, which the model should be able to predict.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_size</span> <span class="o">=</span> <span class="n">rad_all</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="n">input_size</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span> <span class="n">input_size</span><span class="p">:</span><span class="n">input_size</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((40470, 36), (40470, 1))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="load-the-model">
+<h2>Load the model<a class="headerlink" href="#load-the-model" title="Permalink to this heading">#</a></h2>
+<p>Load the model and the input scaler:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./models/</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s1">_model_xco_cris.keras&#39;</span><span class="p">)</span>
+
+<span class="c1"># load the input scaler</span>
+<span class="n">input_scaler</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./models/</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s1">_model_xco_cris_input_scaler.joblib&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+
+<span class="c1"># Disable TensorFlow debugging logs </span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;TF_CPP_MIN_LOG_LEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;2&#39;</span>
+
+<span class="c1">#   Level | Level for Humans | Level Description                  </span>
+<span class="c1">#  -------|------------------|------------------------------------ </span>
+<span class="c1">#   0     | INFO             | [Default] Print all messages       </span>
+<span class="c1">#   1     | WARNING          | Filter out INFO messages           </span>
+<span class="c1">#   2     | ERROR            | Filter out INFO &amp; WARNING messages </span>
+<span class="c1">#   3     | NONE             | Filter out all messages      </span>
+
+
+<span class="c1"># scale the input</span>
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">input_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># make a prediction</span>
+<span class="n">yhat</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1715288277.121067 12733638 service.cc:145] XLA service 0x7fc7a3060c20 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1715288277.121106 12733638 service.cc:153]   StreamExecutor device (0): Host, Default Version
+I0000 00:00:1715288277.152463 12733638 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">)</span>
+<span class="n">rmse</span> <span class="o">=</span> <span class="n">root_mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">)</span>
+<span class="n">pearson</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Train MAE: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">mae</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1"> ppbv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Train RMSE: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">rmse</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1"> ppbv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Train Pearson: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">pearson</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train MAE: 3.7920000553131104 ppbv
+Train RMSE: 5.535999774932861 ppbv
+Train Pearson: 0.974
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Evaluation of mean and standard deviation of the estimated </span><span class="se">\n</span><span class="s1">values of Carbon Monoxide (XCO) column compared to the actual ones: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Carbon Monoxide (XCO) Column True mean: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1"> ppbv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Carbon Monoxide (XCO) Column Estimated mean: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">yhat</span><span class="p">)),</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1"> ppbv </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Carbon Monoxide (XCO) Column True std: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1"> ppbv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Carbon Monoxide (XCO) Column Estimated std: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">yhat</span><span class="p">)),</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1"> ppbv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Evaluation of mean and standard deviation of the estimated 
+values of Carbon Monoxide (XCO) column compared to the actual ones: 
+
+Carbon Monoxide (XCO) Column True mean: 90.5989990234375 ppbv
+Carbon Monoxide (XCO) Column Estimated mean: 91.174 ppbv 
+
+Carbon Monoxide (XCO) Column True std: 24.555999755859375 ppbv
+Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
+
+<span class="c1"># Calculate R-squared value</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;True Values&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted Values&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;True vs Predicted Values&#39;</span><span class="p">)</span>
+
+<span class="c1"># Set the limits of x and y to be the same</span>
+<span class="n">lims</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(),</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">()]),</span>  <span class="c1"># min of both axes</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(),</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">()]),</span>  <span class="c1"># max of both axes</span>
+<span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">lims</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">lims</span><span class="p">)</span>
+
+<span class="c1"># Draw the diagonal line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span> <span class="n">lims</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;R^2 = </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Show the legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/67820ef6949da6555d6c53ba287abf280fcc26d6fce3bcd97fc4c7822105d279.png" src="../_images/67820ef6949da6555d6c53ba287abf280fcc26d6fce3bcd97fc4c7822105d279.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+
+<span class="c1"># Calculate R-squared value</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">,</span> <span class="n">gridsize</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">jet</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;True Values&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted Values&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;True vs Predicted Values (Clustered)&#39;</span><span class="p">)</span>
+
+<span class="n">cb</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;log10(N)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Set the limits of x and y to be the same</span>
+<span class="n">lims</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(),</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">()]),</span>  <span class="c1"># min of both axes</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(),</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">()]),</span>  <span class="c1"># max of both axes</span>
+<span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">lims</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">lims</span><span class="p">)</span>
+
+<span class="c1"># Draw the diagonal line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span> <span class="n">lims</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;R^2 = </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Show the legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e1facd5ed6049546f39e342875ba15100883e808169bea41f6d769a115b6ed1e.png" src="../_images/e1facd5ed6049546f39e342875ba15100883e808169bea41f6d769a115b6ed1e.png" />
+</div>
+</div>
+</section>
+<section id="tropess-xco-truth">
+<h2>TROPESS XCO (Truth)<a class="headerlink" href="#tropess-xco-truth" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">latitude</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span>
+<span class="n">longitude</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span>
+<span class="n">x_col</span> <span class="o">=</span> <span class="n">y</span>
+<span class="n">x_col_hat</span> <span class="o">=</span> <span class="n">yhat</span>
+
+<span class="c1"># Specify figure size (in inches)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>  
+
+<span class="c1"># Create a basemap instance</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;cyl&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;l&#39;</span><span class="p">,</span> 
+            <span class="n">llcrnrlat</span><span class="o">=-</span><span class="mi">90</span><span class="p">,</span> <span class="n">urcrnrlat</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>  <span class="c1"># set latitude limits to -90 and 90</span>
+            <span class="n">llcrnrlon</span><span class="o">=-</span><span class="mi">180</span><span class="p">,</span> <span class="n">urcrnrlon</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>  <span class="c1"># set longitude limits to -180 and 180</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">drawcoastlines</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">drawcountries</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c1"># Draw parallels (latitude lines) and meridians (longitude lines)</span>
+<span class="n">parallels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">90.</span><span class="p">,</span> <span class="mf">91.</span><span class="p">,</span> <span class="mf">30.</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">drawparallels</span><span class="p">(</span><span class="n">parallels</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">meridians</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">180.</span><span class="p">,</span> <span class="mf">181.</span><span class="p">,</span> <span class="mf">60.</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">drawmeridians</span><span class="p">(</span><span class="n">meridians</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>    
+
+<span class="c1"># Standard catter plot</span>
+<span class="c1"># Transform lat and lon to map projection coordinates</span>
+<span class="n">xlon</span><span class="p">,</span> <span class="n">ylat</span> <span class="o">=</span> <span class="n">m</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="p">)</span>
+
+<span class="c1"># Plot the data using scatter (you may want to choose a different colormap and normalization)</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xlon</span><span class="p">,</span> <span class="n">ylat</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">x_col</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">40.0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">200.0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a colorbar</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="s2">&quot;10%&quot;</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;x_col&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5d5e250d2ca15c173c795f0b86417f1f3ddf84b7724989c5080836303744d473.png" src="../_images/5d5e250d2ca15c173c795f0b86417f1f3ddf84b7724989c5080836303744d473.png" />
+</div>
+</div>
+</section>
+<section id="sears-xco-cris-ml-v1-9-predicted">
+<h2>SEARS XCO CrIS ML v1.9 (Predicted)<a class="headerlink" href="#sears-xco-cris-ml-v1-9-predicted" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify figure size (in inches)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>  
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;cyl&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;l&#39;</span><span class="p">,</span> 
+            <span class="n">llcrnrlat</span><span class="o">=-</span><span class="mi">90</span><span class="p">,</span> <span class="n">urcrnrlat</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>  <span class="c1"># set latitude limits to -90 and 90</span>
+            <span class="n">llcrnrlon</span><span class="o">=-</span><span class="mi">180</span><span class="p">,</span> <span class="n">urcrnrlon</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>  <span class="c1"># set longitude limits to -180 and 180</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">drawcoastlines</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">drawcountries</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c1"># Draw parallels (latitude lines) and meridians (longitude lines)</span>
+<span class="n">parallels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">90.</span><span class="p">,</span> <span class="mf">91.</span><span class="p">,</span> <span class="mf">30.</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">drawparallels</span><span class="p">(</span><span class="n">parallels</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">meridians</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">180.</span><span class="p">,</span> <span class="mf">181.</span><span class="p">,</span> <span class="mf">60.</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">drawmeridians</span><span class="p">(</span><span class="n">meridians</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>    
+
+<span class="c1"># Standard catter plot</span>
+<span class="c1"># Transform lat and lon to map projection coordinates</span>
+<span class="n">xlon</span><span class="p">,</span> <span class="n">ylat</span> <span class="o">=</span> <span class="n">m</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="p">)</span>
+
+<span class="c1"># Plot the data using scatter (you may want to choose a different colormap and normalization)</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xlon</span><span class="p">,</span> <span class="n">ylat</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">x_col_hat</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">40.0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">200.0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a colorbar</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="s2">&quot;10%&quot;</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;x_col_hat&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8b219c1ad887b239a5cc2fcab6e5df1947c9f302d992032a8c6e4a197e5d2d80.png" src="../_images/8b219c1ad887b239a5cc2fcab6e5df1947c9f302d992032a8c6e4a197e5d2d80.png" />
+</div>
+</div>
+</section>
+<section id="difference">
+<h2>Difference<a class="headerlink" href="#difference" title="Permalink to this heading">#</a></h2>
+<p>Plot the percentage difference between TROPESS XCO (Truth) and SEARS XCO CrIS ML v1.9 (Predicted):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ydiff</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_col_hat</span> <span class="o">-</span> <span class="n">x_col</span><span class="p">)</span> <span class="o">/</span> <span class="n">x_col</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ydiff</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Specify figure size (in inches)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>  
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;cyl&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;l&#39;</span><span class="p">,</span> 
+            <span class="n">llcrnrlat</span><span class="o">=-</span><span class="mi">90</span><span class="p">,</span> <span class="n">urcrnrlat</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>  <span class="c1"># set latitude limits to -90 and 90</span>
+            <span class="n">llcrnrlon</span><span class="o">=-</span><span class="mi">180</span><span class="p">,</span> <span class="n">urcrnrlon</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>  <span class="c1"># set longitude limits to -180 and 180</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">drawcoastlines</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">drawcountries</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c1"># Draw parallels (latitude lines) and meridians (longitude lines)</span>
+<span class="n">parallels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">90.</span><span class="p">,</span> <span class="mf">91.</span><span class="p">,</span> <span class="mf">30.</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">drawparallels</span><span class="p">(</span><span class="n">parallels</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">meridians</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">180.</span><span class="p">,</span> <span class="mf">181.</span><span class="p">,</span> <span class="mf">60.</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">drawmeridians</span><span class="p">(</span><span class="n">meridians</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>    
+
+<span class="c1"># Standard catter plot</span>
+<span class="c1"># Transform lat and lon to map projection coordinates</span>
+<span class="n">xlon</span><span class="p">,</span> <span class="n">ylat</span> <span class="o">=</span> <span class="n">m</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="p">)</span>
+
+<span class="c1"># Plot the data using scatter (you may want to choose a different colormap and normalization)</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xlon</span><span class="p">,</span> <span class="n">ylat</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">ydiff</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=+</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a colorbar</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="s2">&quot;10%&quot;</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;100 * (x_col_hat - x_col) / x_col&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total: 40470
+</pre></div>
+</div>
+<img alt="../_images/8232d1aa3d0c8cfdddd7e1955a474dbe4edb9e5a38a484d276a5b057d7881d49.png" src="../_images/8232d1aa3d0c8cfdddd7e1955a474dbe4edb9e5a38a484d276a5b057d7881d49.png" />
+</div>
+</div>
+</section>
+<section id="difference-less-than-10">
+<h2>Difference (less than 10%)<a class="headerlink" href="#difference-less-than-10" title="Permalink to this heading">#</a></h2>
+<p>Plot the percentage difference between the TROPESS XCO (Truth) and the SEARS XCO CrIS ML v1.9 (Predicted) where the difference is less than 10%:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ydiff</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_col_hat</span> <span class="o">-</span> <span class="n">x_col</span><span class="p">)</span> <span class="o">/</span> <span class="n">x_col</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ydiff</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">ydiff_10_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ydiff</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ydiff_10</span> <span class="o">=</span> <span class="n">ydiff</span><span class="p">[</span><span class="n">ydiff_10_index</span><span class="p">]</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total (Difference &lt; 10%): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ydiff_10</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">latitude_10</span> <span class="o">=</span> <span class="n">latitude</span><span class="p">[</span><span class="n">ydiff_10_index</span><span class="p">]</span>
+<span class="n">longitude_10</span> <span class="o">=</span> <span class="n">longitude</span><span class="p">[</span><span class="n">ydiff_10_index</span><span class="p">]</span>
+
+<span class="c1"># Specify figure size (in inches)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>  
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;cyl&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;l&#39;</span><span class="p">,</span> 
+            <span class="n">llcrnrlat</span><span class="o">=-</span><span class="mi">90</span><span class="p">,</span> <span class="n">urcrnrlat</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>  <span class="c1"># set latitude limits to -90 and 90</span>
+            <span class="n">llcrnrlon</span><span class="o">=-</span><span class="mi">180</span><span class="p">,</span> <span class="n">urcrnrlon</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>  <span class="c1"># set longitude limits to -180 and 180</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">drawcoastlines</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">drawcountries</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c1"># Draw parallels (latitude lines) and meridians (longitude lines)</span>
+<span class="n">parallels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">90.</span><span class="p">,</span> <span class="mf">91.</span><span class="p">,</span> <span class="mf">30.</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">drawparallels</span><span class="p">(</span><span class="n">parallels</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">meridians</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">180.</span><span class="p">,</span> <span class="mf">181.</span><span class="p">,</span> <span class="mf">60.</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">drawmeridians</span><span class="p">(</span><span class="n">meridians</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>    
+
+<span class="c1"># Standard catter plot</span>
+<span class="c1"># Transform lat and lon to map projection coordinates</span>
+<span class="n">xlon</span><span class="p">,</span> <span class="n">ylat</span> <span class="o">=</span> <span class="n">m</span><span class="p">(</span><span class="n">longitude_10</span><span class="p">,</span> <span class="n">latitude_10</span><span class="p">)</span>
+
+<span class="c1"># Plot the data using scatter (you may want to choose a different colormap and normalization)</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xlon</span><span class="p">,</span> <span class="n">ylat</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">ydiff_10</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=+</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a colorbar</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="s2">&quot;10%&quot;</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;100 * (x_col_hat - x_col) / x_col &lt; 10%&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total: 40470
+Total (Difference &lt; 10%): 37666
+</pre></div>
+</div>
+<img alt="../_images/96161a6f3de0e82cf07f1e07742c68cdd649c3146c9319ef3f1d52fccacb12d7.png" src="../_images/96161a6f3de0e82cf07f1e07742c68cdd649c3146c9319ef3f1d52fccacb12d7.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to CrIS XCO ML</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../license/"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">License</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-python-packages">Import Python packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-model-version">Select model version</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-input-and-output-variables">Read the input and output variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#put-everything-in-a-dataframe">Put everything in a DataFrame</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-input-and-output-variables-of-the-neural-network-model">Define input and output variables of the neural network model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-model">Load the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tropess-xco-truth">TROPESS XCO (Truth)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sears-xco-cris-ml-v1-9-predicted">SEARS XCO CrIS ML v1.9 (Predicted)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difference">Difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-less-than-10">Difference (less than 10%)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Swift Software Group
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
