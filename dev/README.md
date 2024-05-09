@@ -7,7 +7,7 @@
 Setup Python and install packages:
 
 ```bash
-source configure.sh
+source configure-cpu.sh
 ```
 
 ## Build

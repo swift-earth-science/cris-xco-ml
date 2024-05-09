@@ -1,10 +1,16 @@
 # cris-xco-ml
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11155540.svg)](https://zenodo.org/doi/10.5281/zenodo.11155540)
-
-
 Fast Carbon Monoxide Column (XCO) Estimation from Cross-track Infrared Sounder (CrIS) L1B Data Using Machine Learning
 
+## Published Book
+
+You can find the published book here: [CrIS XCO ML](https://cris-xco-ml.swiftearthscience.org/)
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11155540.svg)](https://zenodo.org/doi/10.5281/zenodo.11155540)
+
+## Book Development
+
+For book development see the [README](dev/README.md) in `dev`.
 ---
 
 ## Copyright and Licensing Info

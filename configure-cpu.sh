@@ -39,10 +39,12 @@ pip install --upgrade wheel
 pip install --upgrade pip
 
 # install development and runtime packages
+pip install -r dev/requirements.txt
 pip install -r requirements-cpu.txt
 
 # directories
 mkdir -p ./book/data
 mkdir -p ./book/models
+mkdir -p ./book/scripts
 
 popd > /dev/null
