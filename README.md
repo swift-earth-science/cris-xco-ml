@@ -11,6 +11,7 @@ You can find the published book here: [CrIS XCO ML](https://cris-xco-ml.swiftear
 ## Book Development
 
 For book development see the [README](dev/README.md) in `dev`.
+
 ---
 
 ## Copyright and Licensing Info
