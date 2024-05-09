@@ -4,6 +4,10 @@
 format: jb-book
 root: index
 parts:
+  - caption: Model Validation
+    chapters:
+    - file: validate-xco-cris  
+
   - caption: Miscellaneous
     chapters:
     - file: license  

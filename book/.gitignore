@@ -3,3 +3,6 @@ data/*
 
 images/*
 !images/.gitkeep
+
+models/*
+!models/.gitkeep
