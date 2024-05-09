@@ -380,18 +380,24 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-python-packages">Import Python packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-packages">Import packages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-model-version">Select model version</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-input-and-output-variables">Read the input and output variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#put-everything-in-a-dataframe">Put everything in a DataFrame</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-input-and-output-variables-of-the-neural-network-model">Define input and output variables of the neural network model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-test-data">Read test data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data">Read data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#put-everything-in-a-dataframe">Put everything in a DataFrame</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-model-inputs-and-outputs">Define model inputs and outputs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-model">Load the model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tropess-xco-truth">TROPESS XCO (Truth)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sears-xco-cris-ml-v1-9-predicted">SEARS XCO CrIS ML v1.9 (Predicted)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difference">Difference</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-less-than-10">Difference (less than 10%)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-model">Run the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-a-few-metrics">Calculate a few metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-mean-and-standard-deviation">Compare mean and standard deviation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-r-squared">Plot R Squared</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-clustered-r-squared">Plot Clustered R Squared</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-tropess-xco-true-value">Plot TROPESS XCO (True Value)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-sears-xco-cris-ml-predicted-value">Plot <code class="docutils literal notranslate"><span class="pre">SEARS</span> <span class="pre">XCO</span> <span class="pre">CrIS</span> <span class="pre">ML</span></code> (Predicted Value)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-difference">Plot Difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-difference-less-than-10">Plot Difference (less than 10%)</a></li>
 </ul>
             </nav>
         </div>
@@ -407,8 +413,8 @@ document.write(`
 <h1>Model Validation for Carbon Monoxide Column (XCO)<a class="headerlink" href="#model-validation-for-carbon-monoxide-column-xco" title="Permalink to this heading">#</a></h1>
 <p>This code validates the <code class="docutils literal notranslate"><span class="pre">SEARS</span> <span class="pre">XCO</span> <span class="pre">CrIS</span> <span class="pre">ML</span> <span class="pre">v1.9</span></code> model for Carbon Monoxide Column (XCO).</p>
 <p>The code runs a test for <code class="docutils literal notranslate"><span class="pre">January</span> <span class="pre">2nd,</span> <span class="pre">2024</span></code> and compares the TROPESS XCO data “Truth” with the SEARS XCO CrIS ML v1.9 model predictions for the same day.</p>
-<section id="import-python-packages">
-<h2>Import Python packages<a class="headerlink" href="#import-python-packages" title="Permalink to this heading">#</a></h2>
+<section id="import-packages">
+<h2>Import packages<a class="headerlink" href="#import-packages" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
@@ -424,7 +430,6 @@ document.write(`
 
 <span class="c1"># Machine Learning</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">root_mean_squared_error</span>
-
 <span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
 
 <span class="c1"># Plotting</span>
@@ -434,7 +439,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-05-09 13:57:53.779725: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-05-09 16:15:04.953927: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
 To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
@@ -452,8 +457,10 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 </div>
 </div>
 </section>
-<section id="read-the-input-and-output-variables">
-<h2>Read the input and output variables<a class="headerlink" href="#read-the-input-and-output-variables" title="Permalink to this heading">#</a></h2>
+<section id="read-test-data">
+<h2>Read test data<a class="headerlink" href="#read-test-data" title="Permalink to this heading">#</a></h2>
+<section id="read-data">
+<h3>Read data<a class="headerlink" href="#read-data" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;./data/TRPSYL2COCRS1FS.1/2024-01-02/tropess_cris_rad.nc&#39;</span><span class="p">)</span>
@@ -489,7 +496,7 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 </div>
 </section>
 <section id="put-everything-in-a-dataframe">
-<h2>Put everything in a DataFrame<a class="headerlink" href="#put-everything-in-a-dataframe" title="Permalink to this heading">#</a></h2>
+<h3>Put everything in a DataFrame<a class="headerlink" href="#put-everything-in-a-dataframe" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rad_all</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;freq_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rad_all</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
@@ -815,9 +822,11 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 <p>40470 rows × 37 columns</p>
 </div></div></div>
 </div>
-<section id="define-input-and-output-variables-of-the-neural-network-model">
-<h3>Define input and output variables of the neural network model<a class="headerlink" href="#define-input-and-output-variables-of-the-neural-network-model" title="Permalink to this heading">#</a></h3>
-<p>In a next step, you define the columns and rows of the loaded dataset that shall serve as input (X) and output (y) variables of the neural network model. The first 31 + 5 columns featuring spectral radiance values for 31 wavelengths as well as solar zenith angle, sensor view angle, latitude, longitude, and surface altitude will serve as input (X) variables. The XCO column Carbon Monoxide information serves as output (y) variable, which the model should be able to predict.</p>
+</section>
+</section>
+<section id="define-model-inputs-and-outputs">
+<h2>Define model inputs and outputs<a class="headerlink" href="#define-model-inputs-and-outputs" title="Permalink to this heading">#</a></h2>
+<p>The first 31 + 5 columns featuring spectral radiance values for 31 wavelengths as well as solar zenith angle, sensor view angle, latitude, longitude, and surface altitude will serve as input (X) variables. The XCO column Carbon Monoxide information serves as output (y) variable, which the model should be able to predict.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_size</span> <span class="o">=</span> <span class="n">rad_all</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span>
@@ -835,7 +844,6 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 </div>
 </div>
 </section>
-</section>
 <section id="load-the-model">
 <h2>Load the model<a class="headerlink" href="#load-the-model" title="Permalink to this heading">#</a></h2>
 <p>Load the model and the input scaler:</p>
@@ -850,6 +858,9 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 </div>
 </div>
 </div>
+</section>
+<section id="run-the-model">
+<h2>Run the model<a class="headerlink" href="#run-the-model" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
@@ -875,33 +886,39 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1715288277.121067 12733638 service.cc:145] XLA service 0x7fc7a3060c20 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
-I0000 00:00:1715288277.121106 12733638 service.cc:153]   StreamExecutor device (0): Host, Default Version
-I0000 00:00:1715288277.152463 12733638 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+I0000 00:00:1715296508.143206 12852464 service.cc:145] XLA service 0x7fed9dbe23f0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1715296508.143244 12852464 service.cc:153]   StreamExecutor device (0): Host, Default Version
+I0000 00:00:1715296508.173955 12852464 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="calculate-a-few-metrics">
+<h2>Calculate a few metrics<a class="headerlink" href="#calculate-a-few-metrics" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">)</span>
 <span class="n">rmse</span> <span class="o">=</span> <span class="n">root_mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">)</span>
 <span class="n">pearson</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">))</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Train MAE: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">mae</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1"> ppbv&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Train RMSE: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">rmse</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1"> ppbv&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Train Pearson: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">pearson</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean Absolute Error: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">mae</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1"> ppbv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Root Mean Squared Error: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">rmse</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1"> ppbv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Pearson Correlation Coefficient: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">pearson</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train MAE: 3.7920000553131104 ppbv
-Train RMSE: 5.535999774932861 ppbv
-Train Pearson: 0.974
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Absolute Error: 3.7920000553131104 ppbv
+Root Mean Squared Error: 5.535999774932861 ppbv
+Pearson Correlation Coefficient: 0.974
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="compare-mean-and-standard-deviation">
+<h2>Compare mean and standard deviation<a class="headerlink" href="#compare-mean-and-standard-deviation" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Evaluation of mean and standard deviation of the estimated </span><span class="se">\n</span><span class="s1">values of Carbon Monoxide (XCO) column compared to the actual ones: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -927,6 +944,9 @@ Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
 </div>
 </div>
 </div>
+</section>
+<section id="plot-r-squared">
+<h2>Plot R Squared<a class="headerlink" href="#plot-r-squared" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
@@ -963,6 +983,9 @@ Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
 <img alt="../_images/67820ef6949da6555d6c53ba287abf280fcc26d6fce3bcd97fc4c7822105d279.png" src="../_images/67820ef6949da6555d6c53ba287abf280fcc26d6fce3bcd97fc4c7822105d279.png" />
 </div>
 </div>
+</section>
+<section id="plot-clustered-r-squared">
+<h2>Plot Clustered R Squared<a class="headerlink" href="#plot-clustered-r-squared" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
@@ -1003,8 +1026,8 @@ Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
 </div>
 </div>
 </section>
-<section id="tropess-xco-truth">
-<h2>TROPESS XCO (Truth)<a class="headerlink" href="#tropess-xco-truth" title="Permalink to this heading">#</a></h2>
+<section id="plot-tropess-xco-true-value">
+<h2>Plot TROPESS XCO (True Value)<a class="headerlink" href="#plot-tropess-xco-true-value" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">latitude</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span>
@@ -1050,8 +1073,8 @@ Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
 </div>
 </div>
 </section>
-<section id="sears-xco-cris-ml-v1-9-predicted">
-<h2>SEARS XCO CrIS ML v1.9 (Predicted)<a class="headerlink" href="#sears-xco-cris-ml-v1-9-predicted" title="Permalink to this heading">#</a></h2>
+<section id="plot-sears-xco-cris-ml-predicted-value">
+<h2>Plot <code class="docutils literal notranslate"><span class="pre">SEARS</span> <span class="pre">XCO</span> <span class="pre">CrIS</span> <span class="pre">ML</span></code> (Predicted Value)<a class="headerlink" href="#plot-sears-xco-cris-ml-predicted-value" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify figure size (in inches)</span>
@@ -1091,13 +1114,13 @@ Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
 </div>
 </div>
 </section>
-<section id="difference">
-<h2>Difference<a class="headerlink" href="#difference" title="Permalink to this heading">#</a></h2>
+<section id="plot-difference">
+<h2>Plot Difference<a class="headerlink" href="#plot-difference" title="Permalink to this heading">#</a></h2>
 <p>Plot the percentage difference between TROPESS XCO (Truth) and SEARS XCO CrIS ML v1.9 (Predicted):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ydiff</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_col_hat</span> <span class="o">-</span> <span class="n">x_col</span><span class="p">)</span> <span class="o">/</span> <span class="n">x_col</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ydiff</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;# of observations: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ydiff</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="c1"># Specify figure size (in inches)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>  
@@ -1132,24 +1155,24 @@ Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total: 40470
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># of observations: 40470
 </pre></div>
 </div>
 <img alt="../_images/8232d1aa3d0c8cfdddd7e1955a474dbe4edb9e5a38a484d276a5b057d7881d49.png" src="../_images/8232d1aa3d0c8cfdddd7e1955a474dbe4edb9e5a38a484d276a5b057d7881d49.png" />
 </div>
 </div>
 </section>
-<section id="difference-less-than-10">
-<h2>Difference (less than 10%)<a class="headerlink" href="#difference-less-than-10" title="Permalink to this heading">#</a></h2>
+<section id="plot-difference-less-than-10">
+<h2>Plot Difference (less than 10%)<a class="headerlink" href="#plot-difference-less-than-10" title="Permalink to this heading">#</a></h2>
 <p>Plot the percentage difference between the TROPESS XCO (Truth) and the SEARS XCO CrIS ML v1.9 (Predicted) where the difference is less than 10%:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ydiff</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_col_hat</span> <span class="o">-</span> <span class="n">x_col</span><span class="p">)</span> <span class="o">/</span> <span class="n">x_col</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ydiff</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;# of observations: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ydiff</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="n">ydiff_10_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ydiff</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">ydiff_10</span> <span class="o">=</span> <span class="n">ydiff</span><span class="p">[</span><span class="n">ydiff_10_index</span><span class="p">]</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total (Difference &lt; 10%): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ydiff_10</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;# of observations where difference &lt; 10%: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ydiff_10</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="n">latitude_10</span> <span class="o">=</span> <span class="n">latitude</span><span class="p">[</span><span class="n">ydiff_10_index</span><span class="p">]</span>
 <span class="n">longitude_10</span> <span class="o">=</span> <span class="n">longitude</span><span class="p">[</span><span class="n">ydiff_10_index</span><span class="p">]</span>
@@ -1187,8 +1210,8 @@ Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total: 40470
-Total (Difference &lt; 10%): 37666
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># of observations: 40470
+# of observations where difference &lt; 10%: 37666
 </pre></div>
 </div>
 <img alt="../_images/96161a6f3de0e82cf07f1e07742c68cdd649c3146c9319ef3f1d52fccacb12d7.png" src="../_images/96161a6f3de0e82cf07f1e07742c68cdd649c3146c9319ef3f1d52fccacb12d7.png" />
@@ -1261,18 +1284,24 @@ Total (Difference &lt; 10%): 37666
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-python-packages">Import Python packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-packages">Import packages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-model-version">Select model version</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-input-and-output-variables">Read the input and output variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#put-everything-in-a-dataframe">Put everything in a DataFrame</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-input-and-output-variables-of-the-neural-network-model">Define input and output variables of the neural network model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-test-data">Read test data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data">Read data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#put-everything-in-a-dataframe">Put everything in a DataFrame</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-model-inputs-and-outputs">Define model inputs and outputs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-model">Load the model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tropess-xco-truth">TROPESS XCO (Truth)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sears-xco-cris-ml-v1-9-predicted">SEARS XCO CrIS ML v1.9 (Predicted)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difference">Difference</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-less-than-10">Difference (less than 10%)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-model">Run the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-a-few-metrics">Calculate a few metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-mean-and-standard-deviation">Compare mean and standard deviation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-r-squared">Plot R Squared</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-clustered-r-squared">Plot Clustered R Squared</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-tropess-xco-true-value">Plot TROPESS XCO (True Value)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-sears-xco-cris-ml-predicted-value">Plot <code class="docutils literal notranslate"><span class="pre">SEARS</span> <span class="pre">XCO</span> <span class="pre">CrIS</span> <span class="pre">ML</span></code> (Predicted Value)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-difference">Plot Difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-difference-less-than-10">Plot Difference (less than 10%)</a></li>
 </ul>
   </nav></div>
 
