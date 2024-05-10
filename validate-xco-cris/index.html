@@ -395,8 +395,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-r-squared">Plot R Squared</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-clustered-r-squared">Plot Clustered R Squared</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-tropess-xco-true-value">Plot TROPESS XCO (True Value)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-sears-xco-cris-ml-predicted-value">Plot <code class="docutils literal notranslate"><span class="pre">SEARS</span> <span class="pre">XCO</span> <span class="pre">CrIS</span> <span class="pre">ML</span></code> (Predicted Value)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-difference">Plot Difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-model-xco-predicted-value">Plot Model XCO (Predicted Value)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-difference-predicted-true">Plot Difference (Predicted - True)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-difference-less-than-10">Plot Difference (less than 10%)</a></li>
 </ul>
             </nav>
@@ -411,8 +411,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="model-validation-for-carbon-monoxide-column-xco">
 <h1>Model Validation for Carbon Monoxide Column (XCO)<a class="headerlink" href="#model-validation-for-carbon-monoxide-column-xco" title="Permalink to this heading">#</a></h1>
-<p>This code validates the <code class="docutils literal notranslate"><span class="pre">SEARS</span> <span class="pre">XCO</span> <span class="pre">CrIS</span> <span class="pre">ML</span> <span class="pre">v1.9</span></code> model for Carbon Monoxide Column (XCO).</p>
-<p>The code runs a test for <code class="docutils literal notranslate"><span class="pre">January</span> <span class="pre">2nd,</span> <span class="pre">2024</span></code> and compares the <a class="reference external" href="https://disc.gsfc.nasa.gov/datasets/TRPSYL2COCRS1FS_1/summary">TROPESS</a> XCO data “Truth” with the SEARS XCO CrIS ML v1.9 model predictions for the same day.</p>
+<p>This code describes the validation steps for the SEARS XCO CrIS ML model for Carbon Monoxide Column (XCO) prediction.</p>
+<p>The code runs a test for <code class="docutils literal notranslate"><span class="pre">January</span> <span class="pre">2nd,</span> <span class="pre">2024</span></code> and compares the <a class="reference external" href="https://disc.gsfc.nasa.gov/datasets/TRPSYL2COCRS1FS_1/summary">TROPESS</a> XCO data “Truth” with the SEARS XCO CrIS ML model predictions for the same day.</p>
+<p>The name of the model used is “Swift EARth Science XCO CrIS ML” also known as “SEARS XCO CrIS ML” and the version used for testing is v1.9 which at the time of this writing is the latest version of the SEARS XCO CrIS ML model.</p>
 <section id="import-packages">
 <h2>Import packages<a class="headerlink" href="#import-packages" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -1073,8 +1074,8 @@ Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
 </div>
 </div>
 </section>
-<section id="plot-sears-xco-cris-ml-predicted-value">
-<h2>Plot <code class="docutils literal notranslate"><span class="pre">SEARS</span> <span class="pre">XCO</span> <span class="pre">CrIS</span> <span class="pre">ML</span></code> (Predicted Value)<a class="headerlink" href="#plot-sears-xco-cris-ml-predicted-value" title="Permalink to this heading">#</a></h2>
+<section id="plot-model-xco-predicted-value">
+<h2>Plot Model XCO (Predicted Value)<a class="headerlink" href="#plot-model-xco-predicted-value" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify figure size (in inches)</span>
@@ -1114,8 +1115,8 @@ Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
 </div>
 </div>
 </section>
-<section id="plot-difference">
-<h2>Plot Difference<a class="headerlink" href="#plot-difference" title="Permalink to this heading">#</a></h2>
+<section id="plot-difference-predicted-true">
+<h2>Plot Difference (Predicted - True)<a class="headerlink" href="#plot-difference-predicted-true" title="Permalink to this heading">#</a></h2>
 <p>Plot the percentage difference between TROPESS XCO (Truth) and SEARS XCO CrIS ML v1.9 (Predicted):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1299,8 +1300,8 @@ Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-r-squared">Plot R Squared</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-clustered-r-squared">Plot Clustered R Squared</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-tropess-xco-true-value">Plot TROPESS XCO (True Value)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-sears-xco-cris-ml-predicted-value">Plot <code class="docutils literal notranslate"><span class="pre">SEARS</span> <span class="pre">XCO</span> <span class="pre">CrIS</span> <span class="pre">ML</span></code> (Predicted Value)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-difference">Plot Difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-model-xco-predicted-value">Plot Model XCO (Predicted Value)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-difference-predicted-true">Plot Difference (Predicted - True)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-difference-less-than-10">Plot Difference (less than 10%)</a></li>
 </ul>
   </nav></div>
