@@ -36,7 +36,7 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
-  google_analytics_id: G-N46YWZ8Q1W
+  google_analytics_id: G-PYEY3JR5F9
 
 sphinx:
   extra_extensions:
