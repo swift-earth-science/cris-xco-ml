@@ -393,8 +393,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-model">Run the model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-a-few-metrics">Calculate a few metrics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-mean-and-standard-deviation">Compare mean and standard deviation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-r-squared">Plot R Squared</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-clustered-r-squared">Plot Clustered R Squared</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-correlation">Linear Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-correlation-clusters">Linear Correlation (Clusters)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-tropess-xco-true-value">Plot TROPESS XCO (True Value)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-model-xco-predicted-value">Plot Model XCO (Predicted Value)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-difference-predicted-true">Plot Difference (Predicted - True)</a></li>
@@ -442,7 +442,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-05-09 16:20:59.636232: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-05-11 09:49:26.373373: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
 To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
@@ -889,9 +889,9 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1715296863.167280 12858841 service.cc:145] XLA service 0x7fdaff84f2a0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
-I0000 00:00:1715296863.167331 12858841 service.cc:153]   StreamExecutor device (0): Host, Default Version
-I0000 00:00:1715296863.201484 12858841 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+I0000 00:00:1715446169.558927 14720122 service.cc:145] XLA service 0x7ff4011dc3f0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1715446169.558965 14720122 service.cc:153]   StreamExecutor device (0): Host, Default Version
+I0000 00:00:1715446169.589399 14720122 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
 </pre></div>
 </div>
 </div>
@@ -948,8 +948,8 @@ Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
 </div>
 </div>
 </section>
-<section id="plot-r-squared">
-<h2>Plot R Squared<a class="headerlink" href="#plot-r-squared" title="Permalink to this heading">#</a></h2>
+<section id="linear-correlation">
+<h2>Linear Correlation<a class="headerlink" href="#linear-correlation" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
@@ -973,22 +973,22 @@ Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">lims</span><span class="p">)</span>
 
 <span class="c1"># Draw the diagonal line</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span> <span class="n">lims</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;R^2 = </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span> <span class="n">lims</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="c1"># Show the legend</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="c1"># Add R^2 value to the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;$R^2$ = </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/67820ef6949da6555d6c53ba287abf280fcc26d6fce3bcd97fc4c7822105d279.png" src="../_images/67820ef6949da6555d6c53ba287abf280fcc26d6fce3bcd97fc4c7822105d279.png" />
+<img alt="../_images/4bc2c77ae296836920cfa4f525d16be6c239c6db0fd670a1eaa7554be8bdb292.png" src="../_images/4bc2c77ae296836920cfa4f525d16be6c239c6db0fd670a1eaa7554be8bdb292.png" />
 </div>
 </div>
 </section>
-<section id="plot-clustered-r-squared">
-<h2>Plot Clustered R Squared<a class="headerlink" href="#plot-clustered-r-squared" title="Permalink to this heading">#</a></h2>
+<section id="linear-correlation-clusters">
+<h2>Linear Correlation (Clusters)<a class="headerlink" href="#linear-correlation-clusters" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
@@ -1015,17 +1015,17 @@ Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">lims</span><span class="p">)</span>
 
 <span class="c1"># Draw the diagonal line</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span> <span class="n">lims</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;R^2 = </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span> <span class="n">lims</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="c1"># Show the legend</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="c1"># Add R^2 value to the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;$R^2$ = </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e1facd5ed6049546f39e342875ba15100883e808169bea41f6d769a115b6ed1e.png" src="../_images/e1facd5ed6049546f39e342875ba15100883e808169bea41f6d769a115b6ed1e.png" />
+<img alt="../_images/f91b94fc876a9f0e48ea8deeebdfd92dcb17a142c78f70cff7880db2beb44243.png" src="../_images/f91b94fc876a9f0e48ea8deeebdfd92dcb17a142c78f70cff7880db2beb44243.png" />
 </div>
 </div>
 </section>
@@ -1299,8 +1299,8 @@ Carbon Monoxide (XCO) Column Estimated std: 23.689 ppbv
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-model">Run the model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-a-few-metrics">Calculate a few metrics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-mean-and-standard-deviation">Compare mean and standard deviation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-r-squared">Plot R Squared</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-clustered-r-squared">Plot Clustered R Squared</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-correlation">Linear Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-correlation-clusters">Linear Correlation (Clusters)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-tropess-xco-true-value">Plot TROPESS XCO (True Value)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-model-xco-predicted-value">Plot Model XCO (Predicted Value)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-difference-predicted-true">Plot Difference (Predicted - True)</a></li>
