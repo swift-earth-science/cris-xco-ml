@@ -40,10 +40,12 @@ html:
 
 sphinx:
   extra_extensions:
+    - sphinx_sitemap
   # - sphinxext.rediraffe
 
   # see: https://github.com/executablebooks/jupyter-book/issues/1048#issuecomment-708024696
   # see: https://github.com/wpilibsuite/sphinxext-rediraffe
   config:
+    html_baseurl: 'https://cris-xco-ml.swiftearthscience.org/'
     # sphinxext.rediraffe
     # rediraffe_redirects:
