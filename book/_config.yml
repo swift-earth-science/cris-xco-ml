@@ -47,5 +47,9 @@ sphinx:
   # see: https://github.com/wpilibsuite/sphinxext-rediraffe
   config:
     html_baseurl: 'https://cris-xco-ml.swiftearthscience.org/'
+    sitemap_url_scheme: '{link}'
+    sitemap_locales: []
+
     # sphinxext.rediraffe
+
     # rediraffe_redirects:
