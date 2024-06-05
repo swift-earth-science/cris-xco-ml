@@ -12,7 +12,9 @@ You can find the published book here: [CrIS XCO ML](https://cris-xco-ml.swiftear
 
 For book development see the [README](dev/README.md) in `dev`.
 
----
+## Community Contributions
+
+[Discussion Forum](https://github.com/orgs/swift-earth-science/discussions): Please use the forum for questions, discussing ideas, and joining the community.
 
 ## Copyright and Licensing Info
 
